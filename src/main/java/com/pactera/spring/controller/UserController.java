@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -77,7 +78,7 @@ public class UserController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/hi")
+	@GetMapping(value="/hi",consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<String> sayHi() {
 		return paths.includePaths;
 	}
