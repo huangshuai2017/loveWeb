@@ -7,6 +7,9 @@
 		<property name="username" value="dev_user" />
 		<property name="password" value="F2Fa3!33TYyg" />
 	</properties> -->
+	<settings>
+		<setting name="logImpl" value="LOG4J"/>
+	</settings>
 	<typeAliases>
   <package name="com.pactera.spring.model"/>
 </typeAliases>
@@ -22,6 +25,9 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="sqlMap/userMapper.xml" />
+		<mapper resource="com/pactera/spring/mapper/EmpMapper.xml" />
+		<!-- <mapper resource="com/pactera/spring/mapper/RoleMapper.xml" />
+		<mapper resource="com/pactera/spring/mapper/UserMapper.xml" />
+		<mapper resource="com/pactera/spring/mapper/DepartmentMapper.xml" /> -->
 	</mappers>
 </configuration>

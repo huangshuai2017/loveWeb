@@ -10,4 +10,5 @@
 		(#{userName,userPassword,departmentId})
 	</insert>
 
+    
 </mapper>
