@@ -29,12 +29,13 @@ public class TestMybatis {
 
 	String mybatisConf = "config/mybatis-config.xml";
 	SqlSession sqlSession;
+	SqlSessionFactory sqlSessionFactory;
 
 	@Before
 	public void init() throws Exception {
 		System.out.println("测试初始化");
 		Reader reader = Resources.getResourceAsReader(mybatisConf);
-		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader, "development");
+	    sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader, "development");
 		sqlSession = sqlSessionFactory.openSession(true);
 	}
 
@@ -55,7 +56,24 @@ public class TestMybatis {
 //		eList.add(emp1);
 //		sqlSession.insert("insertEmps", eList);
 		List<Emp> kk = sqlSession.selectList("selectByGender", "f");
+		Emp emp1 = new Emp();
+		emp1.setAge(20);
+//		emp1.setGender("f");
+		emp1.setName("jack");
+//		sqlSession.update("updateEmp", emp1);
+		sqlSession.close();
 		System.out.println(kk);
+		SqlSession s1 = sqlSessionFactory.openSession(true);
+		
+				s1.selectList("selectByGender", "f");
+				s1.update("updateEmp", emp1);
+		SqlSession s2 = sqlSessionFactory.openSession(true);
+		
+		s2.selectList("selectByGender", "f");
+//		sqlSession.insert("insertEmp", new Emp("juli", "f", 18));
+//		List<Emp> kk1 = sqlSession.selectList("selectByGender", "f");
+//		List<Emp> kk1 = sqlSession.selectList("selectByAge", 12);
+//		System.out.println(kk1);
 	}
 
 //	@Test
@@ -76,7 +94,7 @@ public class TestMybatis {
 		System.out.println(users);
 	}
 
-	@After
+//	@After
 	public void destroy() {
 		if (sqlSession != null) {
 			sqlSession.close();

@@ -22,6 +22,15 @@ public class Emp {
 	public void setAge(int age) {
 		this.age = age;
 	}
+	public Emp(String name, String gender, int age) {
+		super();
+		this.name = name;
+		this.gender = gender;
+		this.age = age;
+	}
+	public Emp() {
+		super();
+	}
 	
 
 }

@@ -2,10 +2,15 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
 <mapper namespace="com.pactera.spring.dao.EmpMapper">
 	<select id="selectByGender" parameterType="string"
-		resultType="com.pactera.spring.model.Emp">
+		resultType="com.pactera.spring.model.Emp" useCache="true">
 		select * from emp where gender=#{gender}
+	</select>
+	<select id="selectByAge" parameterType="_int"
+		resultType="com.pactera.spring.model.Emp">
+		select * from emp where age=#{age}
 	</select>
 
     <insert id="insertEmps" parameterType="list">
@@ -17,4 +22,15 @@
         (#{item.name},#{item.gender},#{item.age})
         </foreach>
     </insert>
+    <insert id="insertEmp" parameterType="com.pactera.spring.model.Emp">
+        insert into emp (name,gender,age)
+        values
+       
+        (#{name},#{gender},#{age})
+       
+    </insert>
+    <update id="updateEmp" parameterType="com.pactera.spring.model.Emp">
+        update emp set age=#{age} where name=#{name}
+    </update>
+    <cache eviction="FIFO" flushInterval="6000" size="512" readOnly="true"/>
 </mapper>
