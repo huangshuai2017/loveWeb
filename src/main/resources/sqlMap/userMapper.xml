@@ -4,62 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pactera.spring.dao.UserMapper">
 
-    <resultMap type="com.pactera.spring.model.User" id="userAndDepartment">
-    
-        <id property="userId" column="user_id"/>
-        <result property="userName" column="user_name"/>
-         <result property="password" column="user_password"/>
-          <association property="department" column="department_id" 
-          javaType="com.pactera.spring.model.Department"
-          select="selectDepartment"
-          />
-         
-    </resultMap>
-    
-    <resultMap type="com.pactera.spring.model.User" id="userAndDepartment1">
-    
-        <id property="userId" column="user_id"/>
-        <result property="userName" column="user_name"/>
-         <result property="password" column="user_password"/>
-         <result property="departmentId" column="department_id"/>
-          <association property="department" column="department_id" 
-          javaType="com.pactera.spring.model.Department"
-          resultMap="DepartmentResultMap"
-          />
-         
-    </resultMap>
-    <resultMap type="com.pactera.spring.model.Department" id="DepartmentResultMap">
-        <id property="department_id" column="de_department_id"/>
-        <result property="department_name" column="de_department_name"/>
-    </resultMap>
-    
 	<insert id="insertUser"
-		parameterType="com.pactera.spring.model.User" useGeneratedKeys="true"
-		keyProperty="userId"
-		>
+		parameterType="com.pactera.spring.model.User">
 		insert into user (user_name,user_password,department_id) values
-		(#{userName},#{password},#{departmentId})
+		(#{userName,userPassword,departmentId})
 	</insert>
 
-    <select id="selectUserById" parameterType="com.pactera.spring.model.User" 
-        resultMap="userAndDepartment1"
-    >
-        select 
-        user.user_id user_id,
-        user.user_name user_name,
-        user.user_password password,
-        user.department_id department_id,
-        department.department_id de_department_id,
-        department.department_name de_department_name
-        from 
-        user 
-        join department 
-        on user.department_id = department.department_id
-        where user.user_id=#{userId}
-    </select>
     
-    <select id="selectDepartment" parameterType="int"
-     resultType="com.pactera.spring.model.Department">
-        select * from department  where department_id=#{department_id}
-    </select>
 </mapper>

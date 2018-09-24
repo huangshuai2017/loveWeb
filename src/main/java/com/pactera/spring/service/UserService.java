@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
-import com.pactera.spring.dao.UserMapper;
 import com.pactera.spring.exception.NameOrPwdException;
 import com.pactera.spring.exception.NullParamException;
+import com.pactera.spring.mapper.UserMapper;
 import com.pactera.spring.model.User;
 
 @Service

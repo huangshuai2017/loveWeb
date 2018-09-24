@@ -1,4 +1,4 @@
-package com.pactera.spring.dao;
+package com.pactera.spring.mapper;
 
 
 public interface DepartmentMapper {
