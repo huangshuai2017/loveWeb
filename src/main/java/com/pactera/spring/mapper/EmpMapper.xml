@@ -32,5 +32,8 @@
     <update id="updateEmp" parameterType="com.pactera.spring.model.Emp">
         update emp set age=#{age} where name=#{name}
     </update>
+    <delete id="deleteAllByAge" parameterType="com.pactera.spring.model.Emp">
+        call delAllByAge(#{age,mode=IN,jdbcType=INTEGER})
+    </delete>
     <cache eviction="FIFO" flushInterval="6000" size="512" readOnly="true"/>
 </mapper>

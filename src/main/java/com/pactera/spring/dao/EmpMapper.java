@@ -11,4 +11,5 @@ public interface EmpMapper {
 	void insertEmp(Emp emp);
 	List<Emp> selectByAge (int gender);
 	void updateEmp(Emp emp);
+	void deleteAllByAge(Emp emp);
 }
