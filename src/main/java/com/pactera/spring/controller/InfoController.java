@@ -1,23 +1,36 @@
 package com.pactera.spring.controller;
 
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.AbstractController;
+import org.springframework.web.servlet.mvc.LastModified;
 
-@RestController
-@RequestMapping("/info")
-public class InfoController {
+public class InfoController extends AbstractController implements LastModified{
 
-	@GetMapping(value="/test/{id}")
-	@ResponseBody
-	public String test(@PathVariable(name="id") String id,HttpServletRequest request) {
-		System.out.println("test " + id);
-		String uri = request.getRequestURI();
-		System.out.println(uri);
-		return "test info";
+	private static Long count= -1L;
+	public String test() {
+		return "hello";
 	}
+
+	@Override
+	protected ModelAndView handleRequestInternal(HttpServletRequest request,
+			HttpServletResponse response)
+			throws Exception {
+		count= System.currentTimeMillis();
+		response.getWriter().write("hello" +count);
+		return null;
+	}
+
+	@Override
+	public long getLastModified(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		return count;
+	}
+	
 }
