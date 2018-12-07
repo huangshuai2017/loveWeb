@@ -1,6 +1,7 @@
 package com.pactera.spring.model;
 
 public class Emp {
+	private int id;
 	private String name;
 	private String gender;
 	private int age;
@@ -22,15 +23,12 @@ public class Emp {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public Emp(String name, String gender, int age) {
-		super();
-		this.name = name;
-		this.gender = gender;
-		this.age = age;
-	}
-	public Emp() {
-		super();
-	}
-	
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 }
