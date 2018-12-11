@@ -18,6 +18,9 @@
         <foreach collection="list" item="item" separator=",">
             (#{item.name},#{item.gender},#{item.age})
         </foreach>
-
     </insert>
+
+    <select id="selectById" parameterType="int" resultType="com.pactera.spring.model.Emp">
+        SELECT id,name,gender,age FROM emp WHERE id=#{id}
+    </select>
 </mapper>

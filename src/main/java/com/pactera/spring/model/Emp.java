@@ -35,4 +35,14 @@ public class Emp implements Cloneable{
 	public  Emp clone() throws CloneNotSupportedException{
 		return (Emp) super.clone();
 	}
+
+	@Override
+	public String toString() {
+		return "Emp{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", gender='" + gender + '\'' +
+				", age=" + age +
+				'}';
+	}
 }

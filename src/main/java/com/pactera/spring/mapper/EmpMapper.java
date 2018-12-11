@@ -9,4 +9,6 @@ public interface EmpMapper {
 
 	void insertEmp(Emp emp);
 	void insertEmpList(List<Emp> empList);
+
+	Emp selectById(int id);
 }

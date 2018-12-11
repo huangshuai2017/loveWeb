@@ -7,4 +7,5 @@ import java.util.List;
 public interface IEmpservice {
     void insert(Emp emp);
     void insertEmpList(List<Emp> empList);
+    Emp selectById(int id);
 }

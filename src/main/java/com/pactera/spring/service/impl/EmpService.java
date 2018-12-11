@@ -21,4 +21,9 @@ public class EmpService implements IEmpservice{
     public void insertEmpList(List<Emp> empList) {
         empMapper.insertEmpList(empList);
     }
+
+    @Override
+    public Emp selectById(int id) {
+        return empMapper.selectById(id);
+    }
 }
