@@ -5,12 +5,45 @@
          http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 	<display-name>Archetype Created Web Application</display-name>
+	<context-param>
+		<param-name>kkk</param-name>
+		<param-value>jjj</param-value>
+	</context-param>
 	<!-- <context-param> <param-name>contextConfigLocation</param-name> <param-value>classpath:config/applicationContext.xml</param-value> 
 		</context-param> -->
 	<!-- <listener> <listener-class> org.springframework.web.context.ContextLoaderListener 
 		</listener-class> </listener> -->
-
+	<listener>
+		<listener-class>com.pactera.spring.listener.TestListener</listener-class>
+	</listener>
+	<filter>
+		<filter-class>com.pactera.spring.filter.MyFilter</filter-class>
+		<filter-name>MyFilter</filter-name>
+	</filter>
+	<filter-mapping>
+		<filter-name>MyFilter</filter-name>
+		<url-pattern>/</url-pattern>
+	</filter-mapping>
 	<servlet>
+		<servlet-class>com.pactera.spring.controller.MyServlet</servlet-class>
+		<servlet-name>myServlet</servlet-name>
+		<load-on-startup>2</load-on-startup>
+		
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>myServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-class>com.pactera.spring.controller.TestServlet</servlet-class>
+		<servlet-name>TestServlet</servlet-name>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TestServlet</servlet-name>
+		<url-pattern>*.htl</url-pattern>
+	</servlet-mapping>
+	<!-- <servlet>
 		<servlet-name>springmvc</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
@@ -22,8 +55,8 @@
 	<servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>/</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 	<welcome-file-list>
-	    <welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>
