@@ -1,5 +1,7 @@
 package com.pactera.spring.mapper;
 
-public interface DepartmentMapper {
+import com.pactera.spring.model.Department;
 
+public interface DepartmentMapper {
+	Department selectById(int id);
 }

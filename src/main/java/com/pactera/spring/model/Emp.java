@@ -10,6 +10,8 @@ public class Emp implements Cloneable,Serializable{
 	private String name;
 	private String gender;
 	private int age;
+	private int departmentId;
+	
 	public String getName() {
 		return name;
 	}

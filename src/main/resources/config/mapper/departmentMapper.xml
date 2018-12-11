@@ -2,28 +2,41 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<mapper namespace="com.pactera.spring.mapper.DepartmentMapper">
-    <cache eviction="FIFO" flushInterval="60000" size="1024" readOnly="false"/>
-    <insert id="insertEmp" parameterType="com.pactera.spring.model.Emp">
-        insert into emp (name,gender,age)
-        values
-       
-        (#{name},#{gender},#{age})
-       
-    </insert>
-    <insert id="insertEmpList" parameterType="com.pactera.spring.model.Emp">
-        insert into emp (name,gender,age)
-        values
-        <foreach collection="list" item="item" separator=",">
-            (#{item.name},#{item.gender},#{item.age})
-        </foreach>
-    </insert>
 
-    <select id="selectById" parameterType="int" resultType="com.pactera.spring.model.Emp">
-        SELECT id,name,gender,age FROM emp WHERE id=#{id}
-    </select>
-    <select id="selectAll" resultType="com.pactera.spring.model.Emp">
-        SELECT id,name,gender,age FROM emp  limit 3
-    </select>
+<mapper namespace="com.pactera.spring.mapper.DepartmentMapper">
+
+	<resultMap id="DepartmentResultMap"
+		type="com.pactera.spring.model.Department">
+	<id column="department_id" property="id"/>
+	<result column="department_name" property="name"/>
+	<association property="projectManage"
+		 javaType="com.pactera.spring.model.Manager"
+		 column="department_project_manage_id" resultMap="managerResultMap"
+		 />
+	</resultMap>
+	<resultMap type="com.pactera.spring.model.Manager" id="managerResultMap">
+		<id column="manager_id" property="id"/>
+		<result column="manager_name" property="name"/>
+		<result column="manager_position" property="position"/>
+		<result column="manager_age" property="age"/>
+		<result column="manager_department_id" property="departmentId"/>
+	</resultMap>
+	<select id="selectById" parameterType="int"
+		resultMap="DepartmentResultMap">
+		SELECT 
+		d.id as department_id,
+		 d.name as department_name,
+		  d.project_manage_id as department_project_manage_id,
+		  
+		  
+		  m.id as manager_id,
+		m.name as manager_name,
+		m.position as manager_position,
+		m.age as manager_age,
+		m.department_id as manager_department_id
+		 FROM department d
+		left outer join manager m on d.project_manage_id = m.id
+		WHERE d.id=#{id}
+	</select>
+
 </mapper>

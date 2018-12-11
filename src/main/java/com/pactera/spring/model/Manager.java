@@ -6,6 +6,14 @@ public class Manager {
 	private String name;
 	private String position;
 	private int age;
+	private int departmentId;
+	
+	public int getDepartmentId() {
+		return departmentId;
+	}
+	public void setDepartmentId(int departmentId) {
+		this.departmentId = departmentId;
+	}
 	public int getId() {
 		return id;
 	}
@@ -29,6 +37,11 @@ public class Manager {
 	}
 	public void setAge(int age) {
 		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "Manager [id=" + id + ", name=" + name + ", position=" + position + ", age=" + age + ", departmentId="
+				+ departmentId + "]";
 	}
 	
 }

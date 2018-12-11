@@ -1,0 +1,51 @@
+create table manager (
+	id int auto_increment,
+	name varchar(128) not null,
+	position varchar(64) not null,
+	age int not null,
+	department_id int not null,
+	primary key (id)
+);
+insert into 
+	manager
+		 (name,position,age,department_id) 
+	values 
+		('張三','projm',32,1);
+	insert into 
+	manager
+		 (name,position,age,department_id) 
+	values 
+		('李四','prodm',34,1);	
+create table department (
+	id int auto_increment,
+	name varchar(128) not null,
+	project_manage_id int not null,
+	product_manage_id int not null,
+	primary key (id)
+);
+insert into 
+	department
+		 (name,project_manage_id,product_manage_id) 
+	values 
+		('finance',1,2);
+		
+		SELECT 
+		d.id as id,
+		 d.name as name,
+		  d.project_manage_id as project_manage_id,
+		  
+		m.name as manager_name,
+		m.position as manager_position,
+		m.age as manager_age,
+		m.department_id as manager_department_id
+		 FROM department d
+		left outer join manager m on d.project_manage_id = m.id
+		WHERE d.id=1;
+		
+		
+		
+		
+		
+		
+		
+		
