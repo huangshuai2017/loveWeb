@@ -24,19 +24,21 @@
 	<select id="selectById" parameterType="int"
 		resultMap="DepartmentResultMap">
 		SELECT 
-		d.id as department_id,
-		 d.name as department_name,
-		  d.project_manage_id as department_project_manage_id,
+			d.id as department_id,
+		 	d.name as department_name,
+		  	d.project_manage_id as department_project_manage_id,
 		  
-		  
-		  m.id as manager_id,
-		m.name as manager_name,
-		m.position as manager_position,
-		m.age as manager_age,
-		m.department_id as manager_department_id
-		 FROM department d
-		left outer join manager m on d.project_manage_id = m.id
-		WHERE d.id=#{id}
+		  	m.id as manager_id,
+			m.name as manager_name,
+			m.position as manager_position,
+			m.age as manager_age,
+			m.department_id as manager_department_id
+		 FROM 
+		 	department d
+		 left outer 
+		 	join manager m 
+		 on d.project_manage_id = m.id
+		 WHERE d.id=#{id}
 	</select>
 
 </mapper>
