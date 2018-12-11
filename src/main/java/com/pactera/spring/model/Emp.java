@@ -1,6 +1,6 @@
 package com.pactera.spring.model;
 
-public class Emp {
+public class Emp implements Cloneable{
 	private int id;
 	private String name;
 	private String gender;
@@ -30,5 +30,9 @@ public class Emp {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public  Emp clone() throws CloneNotSupportedException{
+		return (Emp) super.clone();
 	}
 }

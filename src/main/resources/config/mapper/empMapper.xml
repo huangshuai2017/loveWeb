@@ -12,5 +12,12 @@
         (#{name},#{gender},#{age})
        
     </insert>
+    <insert id="insertEmpList" parameterType="com.pactera.spring.model.Emp">
+        insert into emp (name,gender,age)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.name},#{item.gender},#{item.age})
+        </foreach>
 
+    </insert>
 </mapper>

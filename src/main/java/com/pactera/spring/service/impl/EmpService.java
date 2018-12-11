@@ -6,6 +6,8 @@ import com.pactera.spring.service.IEmpservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmpService implements IEmpservice{
     @Autowired
@@ -13,5 +15,10 @@ public class EmpService implements IEmpservice{
     @Override
     public void insert(Emp emp) {
         empMapper.insertEmp(emp);
+    }
+
+    @Override
+    public void insertEmpList(List<Emp> empList) {
+        empMapper.insertEmpList(empList);
     }
 }
