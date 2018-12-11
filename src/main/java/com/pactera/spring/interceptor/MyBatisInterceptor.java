@@ -26,6 +26,7 @@ public class MyBatisInterceptor implements Interceptor {
         long start = System.currentTimeMillis();
         Object result = invocation.proceed();
         long end = System.currentTimeMillis();
+        org.apache.ibatis.logging.LogFactory.useLog4JLogging();
         MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];
         System.out.println(mappedStatement.getId() + "耗时:" + (end - start));
         return result;

@@ -1,10 +1,11 @@
 package com.pactera.spring.model;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Emp implements Cloneable{
+public class Emp implements Cloneable,Serializable{
 	private int id;
 	private String name;
 	private String gender;

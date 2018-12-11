@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.pactera.spring.mapper.EmpMapper">
-    
+    <cache eviction="FIFO" flushInterval="60000" size="1024" readOnly="false"/>
     <insert id="insertEmp" parameterType="com.pactera.spring.model.Emp">
         insert into emp (name,gender,age)
         values
@@ -22,5 +22,8 @@
 
     <select id="selectById" parameterType="int" resultType="com.pactera.spring.model.Emp">
         SELECT id,name,gender,age FROM emp WHERE id=#{id}
+    </select>
+    <select id="selectAll" resultType="com.pactera.spring.model.Emp">
+        SELECT id,name,gender,age FROM emp  limit 3
     </select>
 </mapper>

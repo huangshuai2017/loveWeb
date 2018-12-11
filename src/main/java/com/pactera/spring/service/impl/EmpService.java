@@ -26,4 +26,9 @@ public class EmpService implements IEmpservice{
     public Emp selectById(int id) {
         return empMapper.selectById(id);
     }
+
+    @Override
+    public List<Emp> selectAll() {
+        return empMapper.selectAll();
+    }
 }

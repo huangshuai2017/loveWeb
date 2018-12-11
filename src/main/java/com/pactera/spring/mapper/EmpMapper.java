@@ -11,4 +11,5 @@ public interface EmpMapper {
 	void insertEmpList(List<Emp> empList);
 
 	Emp selectById(int id);
+	List<Emp> selectAll();
 }
