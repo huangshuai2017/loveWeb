@@ -21,7 +21,7 @@
 		<result column="manager_age" property="age"/>
 		<result column="manager_department_id" property="departmentId"/>
 	</resultMap>
-	<select id="selectById" parameterType="int"
+	<!-- <select id="selectById" parameterType="int"
 		resultMap="DepartmentResultMap">
 		SELECT 
 			d.id as department_id,
@@ -39,6 +39,31 @@
 		 	join manager m 
 		 on d.project_manage_id = m.id
 		 WHERE d.id=#{id}
+	</select> -->
+	<resultMap type="com.pactera.spring.model.Department"
+			 id="DepartmentResultMap2">
+			 <id column="id" property="id"/>
+			 <result column="name" property="name"/>
+			 <association property="productManager" 
+			 	column="product_manage_id" 
+			 	javaType="com.pactera.spring.model.Manager"
+			 	select="selectManagerById"
+			 />
+			 </resultMap>
+	<select id="selectById" parameterType="int"
+		resultMap="DepartmentResultMap2">
+		SELECT 
+			id ,
+		 	name ,
+		  	product_manage_id 
+		 FROM 
+		 	department 
+		 WHERE id=#{id}
 	</select>
-
+	
+	<select id="selectManagerById" parameterType="int" 
+		resultType="com.pactera.spring.model.Manager">
+		select id,name,position,age,department_id as departmentId
+		from manager where id=#{id}
+	</select>
 </mapper>
