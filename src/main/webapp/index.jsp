@@ -29,7 +29,7 @@ src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </header>
 <body>
 <h2>Hello World!</h2>
-<input type="button" value="login" onclick="login()">
-<input type="button" value="registry" onclick="registry()">
+<%--<input type="button" value="login" onclick="login()">
+<input type="button" value="registry" onclick="registry()">--%>
 </body>
 </html>

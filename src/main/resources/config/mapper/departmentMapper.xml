@@ -48,14 +48,22 @@
 			 	column="product_manage_id" 
 			 	javaType="com.pactera.spring.model.Manager"
 			 	select="selectManagerById"
+						  fetchType="lazy"
 			 />
+		<association property="projectManage"
+					 column="project_manage_id"
+					 javaType="com.pactera.spring.model.Manager"
+					 select="selectManagerById"
+					 fetchType="lazy"
+		/>
 			 </resultMap>
 	<select id="selectById" parameterType="int"
 		resultMap="DepartmentResultMap2">
 		SELECT 
 			id ,
 		 	name ,
-		  	product_manage_id 
+		  	product_manage_id ,
+		  	project_manage_id
 		 FROM 
 		 	department 
 		 WHERE id=#{id}

@@ -40,10 +40,12 @@ public class Department {
 	public void setProductManager(Manager productManager) {
 		this.productManager = productManager;
 	}
+
 	@Override
 	public String toString() {
-		return "Department [id=" + id + ", name=" + name + ", projectManage=" + projectManage + ", productManager="
-				+ productManager + ", empList=" + empList + "]";
+		return "Department{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				'}';
 	}
-	
 }

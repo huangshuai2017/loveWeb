@@ -22,6 +22,7 @@ public class MyFilter implements Filter {
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		System.out.println("MyFilter doFilter");
+		response.setContentType("text/plain;charset=UTF-8");
 		chain.doFilter(request, response);
 	}
 
