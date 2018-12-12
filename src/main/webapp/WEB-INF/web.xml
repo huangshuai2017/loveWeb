@@ -13,17 +13,11 @@
 		</context-param> -->
 	<!-- <listener> <listener-class> org.springframework.web.context.ContextLoaderListener 
 		</listener-class> </listener> -->
-	<listener>
-		<listener-class>com.pactera.spring.listener.TestListener</listener-class>
-	</listener>
-	<filter>
-		<filter-class>com.pactera.spring.filter.MyFilter</filter-class>
-		<filter-name>MyFilter</filter-name>
-	</filter>
-	<filter-mapping>
-		<filter-name>MyFilter</filter-name>
-		<url-pattern>/</url-pattern>
-	</filter-mapping>
+	<!-- <listener> <listener-class>com.pactera.spring.listener.TestListener</listener-class> 
+		</listener> -->
+	<!-- <filter> <filter-class>com.pactera.spring.filter.MyFilter</filter-class> 
+		<filter-name>MyFilter</filter-name> </filter> <filter-mapping> <filter-name>MyFilter</filter-name> 
+		<url-pattern>/</url-pattern> </filter-mapping> -->
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -31,30 +25,27 @@
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
 		</init-param>
+		<init-param>
+			<param-name>forceRequestEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceResponseEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
 	</filter>
 	<filter-mapping>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>/</url-pattern>
 	</filter-mapping>
-	<!-- <servlet>
-		<servlet-class>com.pactera.spring.controller.MyServlet</servlet-class>
-		<servlet-name>myServlet</servlet-name>
-		<load-on-startup>2</load-on-startup>
-		
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>myServlet</servlet-name>
-		<url-pattern>*.do</url-pattern>
-	</servlet-mapping> -->
-	<!-- <servlet>
-		<servlet-class>com.pactera.spring.controller.TestServlet</servlet-class>
-		<servlet-name>TestServlet</servlet-name>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>TestServlet</servlet-name>
-		<url-pattern>*.htl</url-pattern>
-	</servlet-mapping> -->
+	<!-- <servlet> <servlet-class>com.pactera.spring.controller.MyServlet</servlet-class> 
+		<servlet-name>myServlet</servlet-name> <load-on-startup>2</load-on-startup> 
+		</servlet> <servlet-mapping> <servlet-name>myServlet</servlet-name> <url-pattern>*.do</url-pattern> 
+		</servlet-mapping> -->
+	<!-- <servlet> <servlet-class>com.pactera.spring.controller.TestServlet</servlet-class> 
+		<servlet-name>TestServlet</servlet-name> <load-on-startup>1</load-on-startup> 
+		</servlet> <servlet-mapping> <servlet-name>TestServlet</servlet-name> <url-pattern>*.htl</url-pattern> 
+		</servlet-mapping> -->
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -68,7 +59,5 @@
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	<!-- <welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list> -->
+	<!-- <welcome-file-list> <welcome-file>index.jsp</welcome-file> </welcome-file-list> -->
 </web-app>
