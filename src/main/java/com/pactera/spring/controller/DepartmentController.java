@@ -31,10 +31,13 @@ public class DepartmentController {
 	//produces-当前的content-type用来指定当前处理器的body体中的消息类型，
 	//同时也起到了过滤请求的请求头中accept头的作用 不匹配的时候请求端会收到415 – Unsupported Media Type
 	@GetMapping(value = "/select/projM", consumes="text/html",
-			produces = {"text/plain;charset=UTF-8"})
-	public String getDepartmentProjM(@RequestParam("id") int id, HttpServletResponse response) throws Exception {
+			produces = {"text/html;charset=UTF-8"})
+	public String getDepartmentProjM(@RequestParam("id") int id,@RequestParam("city") String city
+
+	) throws Exception {
 		// response.setContentType("text/plain;charset=UTF-8");
 		// response.getWriter().write(departmentService.selectById(id).getProjectManage().getName());
+		System.out.println("city:" + city);
 		return departmentService.selectById(id).getProjectManage().getName();
 	}
 }

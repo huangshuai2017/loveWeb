@@ -18,7 +18,7 @@
 	<!-- <filter> <filter-class>com.pactera.spring.filter.MyFilter</filter-class> 
 		<filter-name>MyFilter</filter-name> </filter> <filter-mapping> <filter-name>MyFilter</filter-name> 
 		<url-pattern>/</url-pattern> </filter-mapping> -->
-	<filter>
+	<!--<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
@@ -37,7 +37,7 @@
 	<filter-mapping>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>/</url-pattern>
-	</filter-mapping>
+	</filter-mapping>-->
 	<!-- <servlet> <servlet-class>com.pactera.spring.controller.MyServlet</servlet-class> 
 		<servlet-name>myServlet</servlet-name> <load-on-startup>2</load-on-startup> 
 		</servlet> <servlet-mapping> <servlet-name>myServlet</servlet-name> <url-pattern>*.do</url-pattern> 
