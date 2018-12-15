@@ -25,12 +25,22 @@ public class DepartmentController {
         return "ok";
     }
 
-    //text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*
-    //consumes-当前的accept用来指定当前处理器的接受请求的类型，
-    //同时也起到了过滤请求的请求头中content-type的作用, 不匹配的时候请求端会收到406 Not Acceptable
-    //produces-当前的content-type用来指定当前处理器的body体中的消息类型，
-    //同时也起到了过滤请求的请求头中accept头的作用 不匹配的时候请求端会收到415 – Unsupported Media Type
-    @GetMapping(value = "/select/projM", consumes = "application/json", produces = {"text/html"})
+    /**
+     * consumes-用来限制请求实体头域中的content-Type,只要请求中的实体头域content-Type头域值在consumes指定的类型中
+     *         则可以正常处理，否则会报406错误，406 Not Acceptable
+     * produces-用来限制请求头域中的Accept，只要该参数指定的值都不在请求头域中的Accept值中，
+     * 则报415错误，Unsupported Media Type；设置响应体中实体头域content-Type的作用
+     * 以上两处校验是在HandlerMapping中校验的
+     * 
+     * @param id
+     * @param city
+     * @param response
+     * @return
+     * @throws Exception
+     */
+               
+    @GetMapping(value = "/select/projM", consumes = "application/json", 
+    		produces = {"text/html;charset=utf-8"})
     public String getDepartmentProjM(@RequestParam("id") int id, @RequestParam("city") String city,
                                    HttpServletResponse response
     ) throws Exception {
