@@ -3,11 +3,15 @@ package com.pactera.spring.model;
 import java.util.List;
 
 public class Department {
+	//id
 	private int id;
-	//Finance Electronic Commerce
+	//部门名 eg.software
 	private String name;
+	//项目经理
 	private Manager projectManage;
+	//产品经理
 	private Manager productManager;
+	//多名员工
 	private List<Emp> empList;
 	
 	public List<Emp> getEmpList() {
@@ -40,12 +44,9 @@ public class Department {
 	public void setProductManager(Manager productManager) {
 		this.productManager = productManager;
 	}
-
 	@Override
 	public String toString() {
-		return "Department{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				'}';
+		return "Department [id=" + id + ", name=" + name + "]";
 	}
+	
 }

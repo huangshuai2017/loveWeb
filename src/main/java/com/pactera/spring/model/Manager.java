@@ -2,10 +2,12 @@ package com.pactera.spring.model;
 
 
 public class Manager {
+	//经理id
 	private int id;
 	private String name;
 	private String position;
 	private int age;
+	//经理所在的部门id
 	private int departmentId;
 	
 	public int getDepartmentId() {

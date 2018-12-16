@@ -27,7 +27,7 @@ insert into
 	department
 		 (name,project_manage_id,product_manage_id) 
 	values 
-		('finance',1,2);
+		('software',1,2);
 		
 		SELECT 
 		d.id as id,

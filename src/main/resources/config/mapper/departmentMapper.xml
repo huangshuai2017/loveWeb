@@ -18,7 +18,7 @@
 	           b.使用场景：数据量大的时候会遇到N+1问题，所以小量的时候比较适用；
 	                     字段少的时候也比较适用，因为字段多，每个字段对应一个关联查询，则查询次数很多，会导致加载很慢。
       <association property="author" column="blog_author_id" javaType="Author"
-      			   resultMap="authorResult"/>
+      			   select="selectAuthor"/>
 	  1.2关联嵌套结果 数据量大的时候避免了N+1问题，使用联合查询SQL。  
 	  <association property="author" column="blog_author_id" javaType="Author"
 	  			   resultMap="authorResult"/>   
@@ -61,21 +61,21 @@
 		 on d.project_manage_id = m.id
 		 WHERE d.id=#{id}
 	</select> -->
-	<resultMap type="com.pactera.spring.model.Department"
-			 id="DepartmentResultMap2">
+	<resultMap id="DepartmentResultMap2" 
+				type="com.pactera.spring.model.Department">
 			 <id column="id" property="id"/>
 			 <result column="name" property="name"/>
-			 <association property="productManager" 
+			 <!-- <association property="productManager" 
 			 	column="product_manage_id" 
 			 	javaType="com.pactera.spring.model.Manager"
 			 	select="selectManagerById"
 						  fetchType="lazy"
-			 />
+			 /> -->
 		<association property="projectManage"
 					 column="project_manage_id"
 					 javaType="com.pactera.spring.model.Manager"
 					 select="selectManagerById"
-					 fetchType="eager"
+					 fetchType="lazy"
 		/>
 			 </resultMap>
 	<select id="selectById" parameterType="int"
@@ -83,7 +83,6 @@
 		SELECT 
 			id ,
 		 	name ,
-		  	product_manage_id ,
 		  	project_manage_id
 		 FROM 
 		 	department 

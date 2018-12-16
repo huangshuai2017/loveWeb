@@ -62,7 +62,7 @@
 	<bean id="factoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:config/mapper/*.xml"/>
-		<property name="plugins" ref="list"/>
+		<!-- <property name="plugins" ref="list"/> -->
 	</bean>
 	<util:list id="list" value-type="org.apache.ibatis.plugin.Interceptor" list-class="java.util.ArrayList">
 		<ref bean="interceptor"/>
