@@ -1,96 +1,111 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.pactera.spring.mapper.DepartmentMapper">
-
-	<resultMap id="DepartmentResultMap"
-		type="com.pactera.spring.model.Department">
-	<id column="department_id" property="id"/>
-	<result column="department_name" property="name"/>
-	<!-- myBatis高级查询指的是关联查询和集合查询，分别对应一对一和一对多查询；
-	     一对一查询使用tag为association ,一对多查询使用tag为collection；
-	  它们分别都有两种形式：嵌套查询和嵌套结果，
-	  嵌套结果又可分为两种形式：一种是嵌套一种是独立一个resultMap，如果查询嵌套简单且不需要复用可以选前者
-	  如果结果复杂且需要复用可以选择后者。
-	  1.1关联嵌套查询 a.可以设置嵌套查询的懒加载属性，不管是否是懒加载在关闭spring容器的时候都会有一个内存泄漏的警告，需要研究此问题；
-	           b.使用场景：数据量大的时候会遇到N+1问题，所以小量的时候比较适用；
-	                     字段少的时候也比较适用，因为字段多，每个字段对应一个关联查询，则查询次数很多，会导致加载很慢。
-      <association property="author" column="blog_author_id" javaType="Author"
-      			   select="selectAuthor"/>
-	  1.2关联嵌套结果 数据量大的时候避免了N+1问题，使用联合查询SQL。  
-	  <association property="author" column="blog_author_id" javaType="Author"
-	  			   resultMap="authorResult"/>   
-	  2.1集合嵌套查询
-	  <collection property="posts" javaType="ArrayList" column="id" 
-	       ofType="Post" select="selectPostsForBlog"/>
-	    javaType属性可以不需要，因为 MyBatis 在很多情况下会为你算出来   
-	  2.2集合嵌套结果 
-	  <collection property="posts" ofType="Post" column="id" resultMap="blogPostResult" 
-	       columnPrefix="post_"/>
-	 -->
-	<association property="projectManage"
-		 javaType="com.pactera.spring.model.Manager"
-		 column="department_project_manage_id" resultMap="managerResultMap"
-		 />
-	</resultMap>
-	<resultMap type="com.pactera.spring.model.Manager" id="managerResultMap">
-		<id column="manager_id" property="id"/>
-		<result column="manager_name" property="name"/>
-		<result column="manager_position" property="position"/>
-		<result column="manager_age" property="age"/>
-		<result column="manager_department_id" property="departmentId"/>
-	</resultMap>
-	 <select id="selectById2" parameterType="int"
-		resultMap="DepartmentResultMap">
+    <!-- myBatis高级查询指的是关联查询和集合查询，分别对应一对一和一对多查询；
+             一对一查询使用tag为association ,一对多查询使用tag为collection；
+          它们分别都有两种形式：嵌套查询和嵌套结果，
+          嵌套结果又可分为两种形式：一种是嵌套一种是独立一个resultMap，如果查询嵌套简单且不需要复用可以选前者
+          如果结果复杂且需要复用可以选择后者。
+          1.1关联嵌套查询 a.可以设置嵌套查询的懒加载属性，不管是否是懒加载在关闭spring容器的时候都会有一个内存泄漏的警告，需要研究此问题；
+                   b.使用场景：数据量大的时候会遇到N+1问题，所以小量的时候比较适用；
+                             字段少的时候也比较适用，因为字段多，每个字段对应一个关联查询，则查询次数很多，会导致加载很慢。
+          <association property="author" column="blog_author_id" javaType="Author"
+                         select="selectAuthor"/>
+          1.2关联嵌套结果 数据量大的时候避免了N+1问题，使用联合查询SQL。
+          <association property="author" column="blog_author_id" javaType="Author"
+                         resultMap="authorResult"/>
+          2.1集合嵌套查询
+          <collection property="posts" javaType="ArrayList" column="id"
+               ofType="Post" select="selectPostsForBlog"/>
+            javaType属性可以不需要，因为 MyBatis 在很多情况下会为你算出来
+          2.2集合嵌套结果
+          <collection property="posts" ofType="Post" column="id" resultMap="blogPostResult"
+               columnPrefix="post_"/>
+         -->
+    <resultMap id="DepartmentResultMap"
+               type="com.pactera.spring.model.Department">
+        <id column="department_id" property="id"/>
+        <result column="department_name" property="name"/>
+        <association property="projectManager"
+                     javaType="com.pactera.spring.model.Manager"
+                     column="department_project_manage_id" resultMap="managerResultMap"
+        />
+        <association property="productManager"
+                     javaType="com.pactera.spring.model.Manager"
+                     column="department_product_manage_id" resultMap="managerResultMap"
+					 columnPrefix="product_"
+        />
+    </resultMap>
+    <!-- 嵌套查询的映射集合-->
+    <resultMap id="managerResultMap" type="com.pactera.spring.model.Manager" >
+        <id column="manager_id" property="id"/>
+        <result column="manager_name" property="name"/>
+        <result column="manager_position" property="position"/>
+        <result column="manager_age" property="age"/>
+        <result column="manager_department_id" property="departmentId"/>
+    </resultMap>
+    <select id="selectById" parameterType="int"
+            resultMap="DepartmentResultMap">
 		SELECT 
 			d.id as department_id,
 		 	d.name as department_name,
 		  	d.project_manage_id as department_project_manage_id,
-		  
+		    d.product_manage_id as department_product_manage_id,
+
 		  	m.id as manager_id,
 			m.name as manager_name,
 			m.position as manager_position,
 			m.age as manager_age,
-			m.department_id as manager_department_id
+			m.department_id as manager_department_id,
+
+			mp.id as product_manager_id,
+            mp.name as product_manager_name,
+			mp.position as product_manager_position,
+			mp.age as product_manager_age,
+			mp.department_id as product_manager_department_id
 		 FROM 
 		 	department d
 		 left outer 
 		 	join manager m 
 		 on d.project_manage_id = m.id
+		 left outer
+		 	join manager mp
+		 on d.product_manage_id = mp.id
 		 WHERE d.id=#{id}
 	</select>
-	<resultMap id="DepartmentResultMap2" 
-				type="com.pactera.spring.model.Department">
-			 <id column="id" property="id"/>
-			 <result column="name" property="name"/>
-			 <!-- <association property="productManager" 
-			 	column="product_manage_id" 
-			 	javaType="com.pactera.spring.model.Manager"
-			 	select="selectManagerById"
-						  fetchType="lazy"
-			 /> -->
-		<association property="projectManage"
-					 column="project_manage_id"
-					 javaType="com.pactera.spring.model.Manager"
-					 select="selectManagerById"
-					 fetchType="lazy"
-		/>
-			 </resultMap>
-	<select id="selectById" parameterType="int"
-		resultMap="DepartmentResultMap2">
-		SELECT 
-			id ,
-		 	name ,
-		  	project_manage_id
-		 FROM 
-		 	department 
-		 WHERE id=#{id}
-	</select>
-	
-	<select id="selectManagerById" parameterType="int" 
-		resultType="com.pactera.spring.model.Manager">
+    <resultMap id="DepartmentResultMap2"
+               type="com.pactera.spring.model.Department">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <!-- <association property="productManager"
+            column="product_manage_id"
+            javaType="com.pactera.spring.model.Manager"
+            select="selectManagerById"
+                     fetchType="lazy"
+        /> -->
+        <association property="projectManage"
+                     column="project_manage_id"
+                     javaType="com.pactera.spring.model.Manager"
+                     select="selectManagerById"
+                     fetchType="lazy"
+        />
+    </resultMap>
+    <!--<select id="selectById" parameterType="int"
+        resultMap="DepartmentResultMap2">
+        SELECT
+            id ,
+             name ,
+              project_manage_id
+         FROM
+             department
+         WHERE id=#{id}
+    </select>-->
+
+    <select id="selectManagerById" parameterType="int"
+            resultType="com.pactera.spring.model.Manager">
 		select id,name,position,age,department_id as departmentId
 		from manager where id=#{id}
 	</select>

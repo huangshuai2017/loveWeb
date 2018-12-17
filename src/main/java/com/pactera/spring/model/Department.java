@@ -8,7 +8,7 @@ public class Department {
 	//部门名 eg.software
 	private String name;
 	//项目经理
-	private Manager projectManage;
+	private Manager projectManager;
 	//产品经理
 	private Manager productManager;
 	//多名员工
@@ -32,27 +32,32 @@ public class Department {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Manager getProjectManage() {
-		return projectManage;
-	}
-	public void setProjectManage(Manager projectManage) {
-		this.projectManage = projectManage;
-	}
+
+
 	public Manager getProductManager() {
 		return productManager;
 	}
+
 	public void setProductManager(Manager productManager) {
 		this.productManager = productManager;
 	}
 
-	@Override
-	public String toString() {
-		return "Department{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", projectManage=" + projectManage +
-				", productManager=" + productManager +
-				", empList=" + empList +
-				'}';
-	}
+    public Manager getProjectManager() {
+        return projectManager;
+    }
+
+    public void setProjectManager(Manager projectManager) {
+        this.projectManager = projectManager;
+    }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", projectManager=" + projectManager +
+                ", productManager=" + productManager +
+                ", empList=" + empList +
+                '}';
+    }
 }
