@@ -22,7 +22,8 @@ public class DepartmentController {
 
 	@GetMapping("/select")
 	public String getDepartment(@RequestParam("id") int id) {
-		departmentService.selectById(id);
+		Department department = departmentService.selectById(id);
+		department.getProjectManage().getAge();
 		return "ok";
 	}
 
@@ -40,7 +41,7 @@ public class DepartmentController {
 	@GetMapping(value = "/select/projM", consumes = "application/json", produces = { "text/html;charset=utf-8" })
 	public String getDepartmentProjM(@RequestParam("id") int id) throws Exception {
 		Department department = departmentService.selectById(id);
-		System.out.println(department);
+//		System.out.println(department);
 		return "查詢成功";
 	}
 }

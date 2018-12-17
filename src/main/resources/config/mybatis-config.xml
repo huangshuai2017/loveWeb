@@ -11,13 +11,13 @@
 		<setting name="logImpl" value="LOG4J"/>
 		<!-- <setting name="localCacheScope" value="STATEMENT"/> -->
 		<setting name="localCacheScope" value="SESSION"/>
-		<setting name="cacheEnabled" value="true"/>
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<!--<setting name="aggressiveLazyLoading" value="true"/>-->
+		<!--<<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>-->
+
 	</settings>
 	<typeAliases>
   <package name="com.pactera.spring.model"/>
 </typeAliases>
 
-	<!--<mappers>
-		<mapper resource="classpath*:com/pactera/spring/mapper/*.xml" />
-	</mappers>-->
 </configuration>

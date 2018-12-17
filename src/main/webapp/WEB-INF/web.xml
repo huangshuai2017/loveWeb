@@ -9,9 +9,9 @@
 		<param-name>kkk</param-name>
 		<param-value>jjj</param-value>
 	</context-param>
-	<listener>
+	<!--<listener>
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
-	</listener>
+	</listener>-->
 	<!-- <context-param> <param-name>contextConfigLocation</param-name> <param-value>classpath:config/applicationContext.xml</param-value> 
 		</context-param> -->
 	<!-- <listener> <listener-class> org.springframework.web.context.ContextLoaderListener 

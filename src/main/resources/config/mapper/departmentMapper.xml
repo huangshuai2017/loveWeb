@@ -75,7 +75,7 @@
 					 column="project_manage_id"
 					 javaType="com.pactera.spring.model.Manager"
 					 select="selectManagerById"
-					 fetchType="lazy"
+
 		/>
 			 </resultMap>
 	<select id="selectById" parameterType="int"
