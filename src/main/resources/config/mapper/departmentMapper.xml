@@ -42,7 +42,7 @@
 		<result column="manager_age" property="age"/>
 		<result column="manager_department_id" property="departmentId"/>
 	</resultMap>
-	<!-- <select id="selectById" parameterType="int"
+	 <select id="selectById2" parameterType="int"
 		resultMap="DepartmentResultMap">
 		SELECT 
 			d.id as department_id,
@@ -60,7 +60,7 @@
 		 	join manager m 
 		 on d.project_manage_id = m.id
 		 WHERE d.id=#{id}
-	</select> -->
+	</select>
 	<resultMap id="DepartmentResultMap2" 
 				type="com.pactera.spring.model.Department">
 			 <id column="id" property="id"/>
@@ -75,7 +75,7 @@
 					 column="project_manage_id"
 					 javaType="com.pactera.spring.model.Manager"
 					 select="selectManagerById"
-
+					 fetchType="lazy"
 		/>
 			 </resultMap>
 	<select id="selectById" parameterType="int"

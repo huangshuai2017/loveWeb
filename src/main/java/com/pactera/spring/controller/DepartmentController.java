@@ -2,6 +2,9 @@ package com.pactera.spring.controller;
 
 import com.pactera.spring.model.Department;
 import com.pactera.spring.service.IDepartmentService;
+import org.apache.log4j.spi.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/department")
 public class DepartmentController {
 
+	private final static Logger LOGGER = LogManager.getLogger(DepartmentController.class);
 	@Autowired
 	IDepartmentService departmentService;
 
@@ -41,7 +45,8 @@ public class DepartmentController {
 	@GetMapping(value = "/select/projM", consumes = "application/json", produces = { "text/html;charset=utf-8" })
 	public String getDepartmentProjM(@RequestParam("id") int id) throws Exception {
 		Department department = departmentService.selectById(id);
-//		System.out.println(department);
-		return "查詢成功";
+//		System.out.println(department.toString());
+		department.getId();
+		return "查询成功";
 	}
 }
