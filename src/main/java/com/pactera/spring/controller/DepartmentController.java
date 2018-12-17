@@ -33,8 +33,6 @@ public class DepartmentController {
 	 * Media Type；设置响应体中实体头域content-Type的作用 以上两处校验是在HandlerMapping中校验的
 	 * 
 	 * @param id
-	 * @param city
-	 * @param response
 	 * @return
 	 * @throws Exception
 	 */
