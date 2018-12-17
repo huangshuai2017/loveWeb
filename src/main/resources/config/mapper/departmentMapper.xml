@@ -38,6 +38,18 @@
                      column="department_product_manage_id" resultMap="managerResultMap"
 					 columnPrefix="product_"
         />
+        <!-- 新增-->
+        <!--<collection property="empList" column="department_id" select="selectEmpByDepartmentId"
+                    ofType="com.pactera.spring.model.Emp"/>-->
+        <!-- 新增集合嵌套结果-->
+        <!--<collection property="empList" column="department_id" resultMap="empResultMap" ofType="com.pactera.spring.model.Emp"/>-->
+        <collection property="empList" column="department_id" ofType="com.pactera.spring.model.Emp">
+            <id column="emp_id" property="id"/>
+            <result column="emp_name" property="name"/>
+            <result column="gender" property="gender"/>
+            <result column="emp_age" property="age"/>
+            <result column="emp_department_id" property="departmentId"/>
+        </collection>
     </resultMap>
     <!-- 嵌套查询的映射集合-->
     <resultMap id="managerResultMap" type="com.pactera.spring.model.Manager" >
@@ -46,6 +58,13 @@
         <result column="manager_position" property="position"/>
         <result column="manager_age" property="age"/>
         <result column="manager_department_id" property="departmentId"/>
+    </resultMap>
+    <resultMap id="empResultMap" type="com.pactera.spring.model.Emp">
+        <id column="emp_id" property="id"/>
+        <result column="emp_name" property="name"/>
+        <result column="gender" property="gender"/>
+        <result column="emp_age" property="age"/>
+        <result column="emp_department_id" property="departmentId"/>
     </resultMap>
     <select id="selectById" parameterType="int"
             resultMap="DepartmentResultMap">
@@ -65,7 +84,14 @@
             mp.name as product_manager_name,
 			mp.position as product_manager_position,
 			mp.age as product_manager_age,
-			mp.department_id as product_manager_department_id
+			mp.department_id as product_manager_department_id,
+
+            e.id as emp_id,
+            e.name as emp_name,
+            e.gender as emp_gender,
+            e.age as emp_age,
+            e.department_id as emp_department_id
+
 		 FROM 
 		 	department d
 		 left outer 
@@ -74,6 +100,9 @@
 		 left outer
 		 	join manager mp
 		 on d.product_manage_id = mp.id
+		 left outer
+		 	join emp e
+		 on d.id = e.id
 		 WHERE d.id=#{id}
 	</select>
     <resultMap id="DepartmentResultMap2"
@@ -109,4 +138,8 @@
 		select id,name,position,age,department_id as departmentId
 		from manager where id=#{id}
 	</select>
+
+    <select id="selectEmpByDepartmentId" parameterType="int" resultType="com.pactera.spring.model.Emp">
+        SELECT id,name,gender,age,department_id as departmentId FROM emp WHERE department_id =#{departmentId}
+    </select>
 </mapper>
