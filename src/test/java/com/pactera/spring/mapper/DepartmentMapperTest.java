@@ -1,6 +1,8 @@
 package com.pactera.spring.mapper;
 
 
+import java.util.stream.Stream;
+
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
