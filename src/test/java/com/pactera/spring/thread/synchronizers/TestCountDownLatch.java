@@ -1,7 +1,12 @@
 package com.pactera.spring.thread.synchronizers;
 
 import java.util.concurrent.CountDownLatch;
-
+/**
+ * 计数下降拴
+ * 实现原理是AQS，AQS基于CAS
+ * @author Administrator
+ *
+ */
 public class TestCountDownLatch {
 
 	
