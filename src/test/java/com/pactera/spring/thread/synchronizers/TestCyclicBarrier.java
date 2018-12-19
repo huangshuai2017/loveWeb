@@ -11,7 +11,7 @@ import java.util.concurrent.CyclicBarrier;
  * 2.也可以在创建CyclicBarrier的时候指定一个barrierAction，当所有的await()方法都执行到的时候，该barrierAction
  * 就会被执行；
  * 3.如果await()方法的调用次数小于CyclicBarrier的count值，则会一直等待；
- * 4.当所有的
+ * 4.当所有的waiting线程都已经释放之后，我们可以继续使用CyclicBarrier
  */
 public class TestCyclicBarrier {
     public static void main(String[] args) throws BrokenBarrierException, InterruptedException {
