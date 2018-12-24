@@ -1,4 +1,9 @@
 package com.pactera.spring.thread.methods;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
+
 /**
  * 学习线程相关的知识
  * stop suspend resume 三个方法被废弃
@@ -20,21 +25,43 @@ package com.pactera.spring.thread.methods;
  */
 public class TestThread {
 
-	public static void main(String[] args) {
-		Thread thread = new Thread(()->{System.out.println("kkk");
-		try {
-			System.out.println("lllll");
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+	public static void main(String[] args) throws ExecutionException, InterruptedException {
+//		Thread thread = new Thread(()->{System.out.println("kkk");
+//		try {
+//			System.out.println("lllll");
+//			Thread.sleep(3000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			System.out.println(e.getMessage());
+//		}
+//		}
+//
+//				);
+//		thread.start();
+//		thread.interrupt();
+//		FutureTask<Integer> futureTask = new FutureTask<>(()-> System.out.println("ddd"),2);
+		FutureTask<Integer> futureTask = new FutureTask<>(new MyCallabel());
+		new Thread(futureTask).start();
+		boolean isDone = false;
+		while (!isDone){
+			System.out.println("working...");
+			isDone = futureTask.isDone();
 		}
-		}
-		
-				);
-		thread.start();
-		thread.interrupt();
+		System.out.println("working done" + futureTask.get());
 	}
 
+}
+class MyCallabel implements Callable<Integer>{
+
+	/**
+	 * Computes a result, or throws an exception if unable to do so.
+	 *
+	 * @return computed result
+	 * @throws Exception if unable to compute a result
+	 */
+	@Override
+	public Integer call() throws Exception {
+		return 123;
+	}
 }
