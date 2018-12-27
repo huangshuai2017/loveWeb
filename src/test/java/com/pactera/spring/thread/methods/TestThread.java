@@ -20,8 +20,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 如果中间被打断可以抛出InterruptedException
  * sleep    当前执行的线程睡眠指定时间，时间到了后线程恢复到可运行状态
  * 如果时间未到被打断，则抛出InterruptedException
- * 睡眠期间不释放监控器的拥有权，也就是不释放对象锁
- * 属于Thread类的静态方法，wait()属于Object的非静态方法并且是final的
+ * 睡眠期间不释放对象锁
+ * 属于Thread类的静态方法，wait()属于Object的非静态方法并且是final的,wait()会释放监控锁，直到被唤醒才会去再次竞争获取锁，
+ *                         wait必须要与synchronized方法或者代码块中使用，并且需要有对应的notify或者notifyAll方法与之呼应
+ *                         否则会出现等待的线程一直在等待永远不会获取锁执行任务
+ *  共同点：都会让当前线程进入TIMED_WAITING状态，睡眠或者等待期间被打断都会报InterruptedException
+ *
  *
  * synchronized与
  * @author Administrator
