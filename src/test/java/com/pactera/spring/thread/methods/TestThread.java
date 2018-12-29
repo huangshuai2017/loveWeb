@@ -13,9 +13,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  * resume被废弃，原因同上，两者是相对而生的；suspend是挂起目前线程
  * resume是将目前线程恢复
  * interrupt 打断线程     1. 只有线程自己能打断自己，别人打断自己的时候会抛出安全异常;
- * 2.当目标线程处于阻塞状态：object的wait() ,thread的join()和sleep()方法
- * 3.时该线程的打断状态将会被清除并抛出一个InterruptedException
- * <p>
+ *                        2.当目标线程处于阻塞状态：object的wait() ,thread的join()和sleep()方法
+ *                        3.时该线程的打断状态将会被清除并抛出一个InterruptedException
+ * interrupted
+ * isInterrupted
  * join             将当前线程加入到父线程中，等该线程运行结束后父线程方可继续运行。
  * 如果中间被打断可以抛出InterruptedException
  * sleep    当前执行的线程睡眠指定时间，时间到了后线程恢复到可运行状态
@@ -47,6 +48,63 @@ public class TestThread {
 //	static volatile Integer atomicInteger = new Integer(0);
 
     public static void main(String[] args) throws InterruptedException {
+
+        Thread thread = new Thread(()-> {
+            System.out.println("thread ...");
+            synchronized (atomicInteger){
+                try {
+                    atomicInteger.wait(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("atomicInteger");
+            }
+//            try {
+//                Thread.sleep(30000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+        });
+        Thread thread2 = new Thread(()-> {
+            synchronized (atomicInteger){
+
+                atomicInteger.notifyAll();
+                try {
+                    Thread.sleep(100000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("atomicInteger");
+            }
+
+
+//            try {
+//                Thread.sleep(30000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+        });
+        thread2.start();
+        System.out.println(new Date().getTime());
+        System.out.println(thread.getState());
+        thread.start();
+        System.out.println(thread.getState());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(thread.getState());
+//        System.out.println(thread.interrupted());
+        thread.interrupt();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(thread.getState());
+        System.out.println(thread.interrupted());
+
 //        new Thread(()->{
 //            while (!stopFlag){
 //                try {
@@ -66,19 +124,19 @@ public class TestThread {
 //                e.printStackTrace();
 //            }
 //        }).start();
-        CountDownLatch countDownLatch = new CountDownLatch(THREADS_COUNT);
-        Thread[] threads = new Thread[THREADS_COUNT];
-        for (int i = 0; i < THREADS_COUNT; i++) {
-            threads[i] = new Thread(() -> {
-                for (int j = 0; j < 10000; j++) {
-                    increase();
-                }
-                countDownLatch.countDown();
-            });
-            threads[i].start();
-        }
-        countDownLatch.await();
-        System.out.println("最后的结果：" + atomicInteger.get());
+//        CountDownLatch countDownLatch = new CountDownLatch(THREADS_COUNT);
+//        Thread[] threads = new Thread[THREADS_COUNT];
+//        for (int i = 0; i < THREADS_COUNT; i++) {
+//            threads[i] = new Thread(() -> {
+//                for (int j = 0; j < 10000; j++) {
+//                    increase();
+//                }
+//                countDownLatch.countDown();
+//            });
+//            threads[i].start();
+//        }
+//        countDownLatch.await();
+//        System.out.println("最后的结果：" + atomicInteger.get());
 //		Vector<String> pool = new Vector<>();
 
 //		AtomicInteger atomicInteger = new AtomicInteger(0);
